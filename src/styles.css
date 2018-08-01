@@ -4,6 +4,10 @@ body{
   color: #404C51;
 }
 
+.ui-widget{
+  font-family: 'Fira Sans', sans-serif;
+}
+
 label{
   font-weight: bold;
 }
@@ -19,4 +23,14 @@ h1{
 .container{
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.col-valor{
+  width: 120px;
+  text-align: right;
+}
+
+.col-data{
+  width: 120px;
+  text-align: center;
 }
