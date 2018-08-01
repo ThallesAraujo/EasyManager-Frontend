@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  margin: 0;
+  font-family: 'Fira Sans', sans-serif;
+  color: #404C51;
+}
+
+label{
+  font-weight: bold;
+}
+
+h1{
+  font-size: 40px;
+}
+
+.datefield{
+  max-width: 95px;
+}
+
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+}
