@@ -1,12 +1,13 @@
 body{
   margin: 0;
   font-family: 'Fira Sans', sans-serif;
-  color: #404C51;
 }
 
 .ui-widget{
   font-family: 'Fira Sans', sans-serif;
 }
+
+.ui-
 
 label{
   font-weight: bold;
@@ -32,5 +33,10 @@ h1{
 
 .col-data{
   width: 120px;
+  text-align: center;
+}
+
+.col-opcoes{
+  width: 100px;
   text-align: center;
 }

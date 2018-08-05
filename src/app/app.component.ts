@@ -40,4 +40,13 @@ export class AppComponent {
       pessoa: 'Energisa S.A.'
     }
   ];
+
+  getStyle(tipo: string) {
+    if (tipo === 'DESPESA') {
+      return {'color': 'red'};
+    } else {
+      return {'color': 'blue'};
+    }
+  }
+
 }

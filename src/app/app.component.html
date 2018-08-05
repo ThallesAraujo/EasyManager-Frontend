@@ -32,10 +32,26 @@
           <p-column field="descricao" header="Descrição"></p-column>
           <p-column field="dataVencimento" header="Vencimento" styleClass="col-data"></p-column>
           <p-column field="dataPagamento" header="Pagamento" styleClass="col-data"></p-column>
-          <p-column field="valor" header="Valor" styleClass="col-valor"></p-column>
+          <p-column field="valor" header="Valor" styleClass="col-valor">
+            <!-- Estilização dinâmica de linhas. Certificar-se sempre de colocar
+            dentro do p-column! -->
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <span [style.color]="lanc.tipo === 'DESPESA'? 'red' : 'green'" >{{lanc.valor}}</span>
+            </ng-template>
+          </p-column>
+          <p-column header="Opções" styleClass="col-opcoes">
+              <ng-template pTemplate="body">
+                  <a pButton icon="fa fa-pencil" style="margin: 5px;"></a>
+                  <button pButton icon="fa fa-trash" class="ui-button-danger"></button>
+                </ng-template>
+          </p-column>
         </p-dataTable>
       </div>
 
+    </div>
+
+    <div class="ui-g-12">
+      <a label="Novo Lançamento" pButton></a>
     </div>
 
   </div>
