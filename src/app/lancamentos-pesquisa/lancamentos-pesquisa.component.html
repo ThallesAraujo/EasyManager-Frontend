@@ -1,0 +1,55 @@
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+<div class="container">
+  <div class="ui-g">
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Descrição</label>
+      <input type="text" pInputText>
+    </div>
+
+    <div class="ui-g-12">
+      <label style="display: block">Vencimento</label>
+      <input class="datefield" type="text" pInputText>
+
+      <label style="padding: 5px">até</label>
+      <input class="datefield" type="text" pInputText>
+
+    </div>
+
+    <div class="ui-g-12">
+      <button type="submit" label="Pesquisar" pButton></button>
+    </div>
+
+    <div class="ui-g">
+
+      <div class="ui-g-12">
+        <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
+          <p-column field="pessoa" header="Pessoa"></p-column>
+          <p-column field="descricao" header="Descrição"></p-column>
+          <p-column field="dataVencimento" header="Vencimento" styleClass="col-data"></p-column>
+          <p-column field="dataPagamento" header="Pagamento" styleClass="col-data"></p-column>
+          <p-column field="valor" header="Valor" styleClass="col-valor">
+            <!-- Estilização dinâmica de linhas. Certificar-se sempre de colocar
+            dentro do p-column! -->
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <span [style.color]="lanc.tipo === 'DESPESA'? 'red' : 'green'" >{{lanc.valor}}</span>
+            </ng-template>
+          </p-column>
+          <p-column styleClass="col-opcoes">
+              <ng-template pTemplate="body">
+                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top"></a>
+                  <button pButton icon="fa fa-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top"></button>
+                </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+
+    </div>
+
+    <div class="ui-g-12">
+      <a label="Novo Lançamento" pButton></a>
+    </div>
+
+  </div>
+</div>
+<app-navbar [titulo]="'Lançamentos'"></app-navbar>

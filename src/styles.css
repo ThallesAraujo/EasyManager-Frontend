@@ -1,5 +1,7 @@
 body{
-  margin: 0;
+  margin-top: 80px;
+  margin-left: 0%;
+  margin-right: 0%;
   font-family: 'Fira Sans', sans-serif;
 }
 
@@ -7,14 +9,9 @@ body{
   font-family: 'Fira Sans', sans-serif;
 }
 
-.ui-
-
 label{
   font-weight: bold;
-}
-
-h1{
-  font-size: 40px;
+  color: rgb(36, 123, 105);
 }
 
 .datefield{
@@ -39,4 +36,33 @@ h1{
 .col-opcoes{
   width: 100px;
   text-align: center;
+}
+
+.ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
+  background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
+  border: none;
+  color: rgb(36, 123, 105);
+  border-radius: 15px;
+}
+
+.ui-datatable th.ui-state-default{
+  color: #fff;
+  background: rgb(36, 123, 105);
+}
+
+.ui-datatable .ui-paginator-bottom{
+  color: #fff;
+  background: rgb(36, 123, 105);
+}
+
+.ui-datatable .ui-datatable-thead>tr>th, .ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td{
+  border-color: rgb(36, 123, 105);
+}
+
+.ui-inputtext{
+  border-color: rgb(36, 123, 105);
+}
+
+.ui-widget-header{
+  border: 0px;
 }
