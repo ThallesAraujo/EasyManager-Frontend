@@ -11,7 +11,7 @@ export class LancamentosPesquisaComponent {
     {
       tipo: 'DESPESA',
       descricao: 'Conta de Água',
-      dataVencimento: '04/07/2018',
+      dataVencimento: new Date(2018, 7, 4),
       dataPagamento: null,
       valor: 24.75,
       pessoa: 'CAGEPA'
@@ -20,14 +20,14 @@ export class LancamentosPesquisaComponent {
       tipo: 'RECEITA',
       descricao: 'Salário',
       dataVencimento: null,
-      dataPagamento: '25/07/2018',
+      dataPagamento: new Date(2018, 7, 25),
       valor: 8570.22,
       pessoa: 'Megadev S.A.'
     },
     {
       tipo: 'DESPESA',
       descricao: 'Supermercado',
-      dataVencimento: '04/07/2018',
+      dataVencimento: new Date(2018, 7, 4),
       dataPagamento: null,
       valor: 750.00,
       pessoa: 'Supermercado Bom Demais'
@@ -35,8 +35,8 @@ export class LancamentosPesquisaComponent {
     {
       tipo: 'DESPESA',
       descricao: 'Conta de Luz',
-      dataVencimento: '30/07/2018',
-      dataPagamento: '11/07/2018',
+      dataVencimento: new Date(2018, 7, 6),
+      dataPagamento: new Date(2018, 7, 9),
       valor: 24.75,
       pessoa: 'Energisa S.A.'
     }
