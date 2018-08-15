@@ -1,3 +1,7 @@
+html{
+  background-color: #002033
+}
+
 body{
   margin-top: 80px;
   margin-left: 0%;
@@ -11,7 +15,7 @@ body{
 
 label{
   font-weight: bold;
-  color: rgb(36, 123, 105);
+  color:rgb(11, 222, 178);
 }
 
 .datefield{
@@ -41,26 +45,41 @@ label{
 .ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
   background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
   border: none;
-  color: rgb(36, 123, 105);
+  color: rgb(11, 222, 178);
   border-radius: 15px;
 }
 
 .ui-datatable th.ui-state-default{
   color: #fff;
-  background: rgb(36, 123, 105);
+  background: rgb(11, 222, 178);
 }
 
 .ui-datatable .ui-paginator-bottom{
   color: #fff;
-  background: rgb(36, 123, 105);
+  background: rgb(11, 222, 178);
 }
 
 .ui-datatable .ui-datatable-thead>tr>th, .ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td{
-  border-color: rgb(36, 123, 105);
+  border-color: rgb(11, 222, 178);
 }
 
 .ui-inputtext{
-  border-color: rgb(36, 123, 105);
+  background: transparent;
+  border-bottom: 1px solid #3f3f3f;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
+}
+
+.ui-inputtext.ui-state-focus, .ui-inputtext:focus{
+  outline-style: none!important;
+  box-shadow: none;
+  border-bottom: 1px solid rgb(11, 222, 178);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
 }
 
 .ui-widget-header{

@@ -1,6 +1,6 @@
 .navbar{
   position: fixed;
-  background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
+  background-image: linear-gradient(to bottom right,#0e8c79, #004369);
   top: 0%;
   width: 100%;
   height: 60px;
@@ -20,11 +20,11 @@
   padding-top: 20px;
   padding-left: 10px;
   font-size: 20px;
-  color:  rgb(36, 123, 105);
+  color:  rgb(11, 222, 178);
 }
 
 .navbar ul li a i{
-  color:  rgb(36, 123, 105);
+  color: rgb(11, 222, 178);
 }
 
 .navbar-menu{
@@ -35,7 +35,7 @@
   margin: 0;
   padding: 10px;
   z-index: 99999;
-  background-color: #ffffff;
+  background-color: #004369;
   position: fixed;
   box-shadow: 0 0 16px rgba(0,0,0,.28);
   list-style: none;
@@ -44,11 +44,11 @@
 .navbar-menu-username{
   font-weight: 500;
   font-size: 28px;
-  color:  rgb(36, 123, 105);
+  color:  rgb(11, 222, 178);
   padding-bottom: 10px;
   padding-top: 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid rgb(36, 123, 105);
+  border-bottom: 1px solid rgb(11, 222, 178);
 }
 
 .navbar-menu-menuitem{
@@ -56,15 +56,15 @@
 }
 
 .navbar-menu-menuitem a{
-  color: #363636;
+  color: #6dc5f8;
   text-decoration: none;
 }
 
 .navbar-menu-menuitem a:hover{
-  color:  rgb(36, 123, 105);
-  border-bottom: 1px solid rgb(36, 123, 105);
+  color:  rgb(11, 222, 178);
+  border-bottom: 1px solid rgb(11, 222, 178);
 }
 
 .navbar-close-menu i{
-  color:  rgb(36, 123, 105);
+  color:  rgb(11, 222, 178);
 }
