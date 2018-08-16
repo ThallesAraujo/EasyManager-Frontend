@@ -13,6 +13,13 @@ body{
   font-family: 'Fira Sans', sans-serif;
 }
 
+
+.ui-widget-content a{
+  color:rgb(11, 222, 178);
+}
+
+
+
 label{
   font-weight: bold;
   color:rgb(11, 222, 178);
@@ -42,11 +49,12 @@ label{
   text-align: center;
 }
 
-.ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
-  background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
-  border: none;
-  color: rgb(11, 222, 178);
+.ui-button {
+  background-image: linear-gradient(to bottom right,#69FF97, #00E4FF)!important;
+  border: none!important;
+  color: #002033!important;
   border-radius: 15px;
+  margin: 10px;
 }
 
 .ui-datatable th.ui-state-default{
@@ -64,6 +72,7 @@ label{
 }
 
 .ui-inputtext{
+  color: #FFF;
   background: transparent;
   border-bottom: 1px solid #3f3f3f;
   border-left: 0;
@@ -73,6 +82,7 @@ label{
 }
 
 .ui-inputtext.ui-state-focus, .ui-inputtext:focus{
+  color: rgb(11, 222, 178);
   outline-style: none!important;
   box-shadow: none;
   border-bottom: 1px solid rgb(11, 222, 178);
@@ -83,5 +93,40 @@ label{
 }
 
 .ui-widget-header{
+  background-color: #002033;
+  background: #002033;
   border: 0px;
+}
+
+.ui-calendar .ui-datepicker{
+  border: none;
+  box-shadow: 0 0 16px #69FF97;
+  border-radius: 10px;
+}
+
+.ui-calendar .ui-datepicker td>span, .ui-datepicker td>a:hover{
+  background-color: #00E4FF!important;
+  color: #002033!important;
+}
+
+.ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active{
+  border: 3px solid rgb(11, 222, 178);
+  color: #00E4FF;
+  border-radius: 40px;
+}
+
+.ui-datepicker *{
+  border-radius: 10px;
+  background-color: #002033!important;
+  border:none;
+  color: rgb(11, 222, 178);
+}
+
+.ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-highlight{
+  color: orangered;
+}
+
+.return-link{
+  color: rgb(11, 222, 178)!important;
+  text-decoration: none;
 }

@@ -6,12 +6,12 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Vencimento</label>
-        <input pInputText type="text">
+        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>Recebimento</label>
-        <input pInputText type="text">
+        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -37,6 +37,12 @@
       <div class="ui-g-12 ui-fluid">
         <label>Observação</label>
         <textarea pInputTextarea rows="3"></textarea>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
+        <a href="#" class="return-link">Voltar a pesquisa</a>
       </div>
 
     </div>
