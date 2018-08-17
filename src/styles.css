@@ -1,5 +1,5 @@
 html{
-  background-color: #002033
+  background-color: #002033;
 }
 
 body{
@@ -9,7 +9,8 @@ body{
   font-family: 'Fira Sans', sans-serif;
 }
 
-.ui-widget{
+.ui-widget,
+.ui-widget input{
   font-family: 'Fira Sans', sans-serif;
 }
 
@@ -47,7 +48,9 @@ label{
   text-align: center;
 }
 
-.ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
+.ui-widget-header .ui-button,
+.ui-widget-content .ui-button,
+.ui-widget.ui-button, .ui-button {
   background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
   border: none!important;
   color: #002033!important;
@@ -66,25 +69,51 @@ label{
   background: rgb(11, 222, 178);
 }
 
-.ui-datatable .ui-datatable-thead>tr>th, .ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td{
+.ui-datatable .ui-datatable-thead>tr>th,
+.ui-datatable .ui-datatable-tfoot>tr>td,
+.ui-datatable .ui-datatable-data>tr>td{
   border-color: rgb(11, 222, 178);
 }
 
-.ui-inputtext{
+.ui-inputtext,
+.ui-dropdown{
   color: #FFF;
-  background: transparent;
-  border-bottom: 1px solid #3f3f3f;
+  outline-style: none!important;
+  background-color: transparent!important;
+  border-bottom: 1px solid #a8a8a8;
   border-left: 0;
   border-right: 0;
   border-top: 0;
   border-radius: 0;
 }
 
-.ui-inputtext.ui-state-focus, .ui-inputtext:focus{
+.ui-dropdown .ui-dropdown-trigger{
+  background-color: transparent!important;
+  color: rgb(11, 222, 178);
+  border: none;
+}
+
+.ui-dropdown:hover{
+  border:none;
+}
+
+.ui-state-default{
+  outline-style: none!important;
+}
+
+.ng-tns-c4-3 .ui-inputwrapper-focus{
+  outline-style: none!important;
+}
+
+.ui-inputtext.ui-state-focus,
+.ui-dropdown.ui-state-focus,
+.ui-inputtext:focus,
+.ui-inputtext:hover,
+.ui-dropdown:focus{
   color: rgb(11, 222, 178);
   outline-style: none!important;
   box-shadow: none;
-  border-bottom: 1px solid rgb(11, 222, 178);
+  border-bottom: 1px solid rgb(11, 222, 178)!important;
   border-left: 0;
   border-right: 0;
   border-top: 0;
@@ -103,7 +132,17 @@ label{
   border-radius: 10px;
 }
 
-.ui-calendar .ui-datepicker td>span, .ui-datepicker td>a:hover{
+.ui-dropdown .ui-dropdown-panel{
+  border: none;
+  box-shadow: 0 0 16px #69FF97;
+  border-radius: 10px;
+  background-color: #002033!important;
+  color: rgb(11, 222, 178)!important;
+}
+
+.ui-calendar .ui-datepicker td>span,
+.ui-datepicker td>a:hover,
+.ui-dropdown-panel .ui-dropdown-list :hover{
   background-color: #00E4FF!important;
   color: #002033!important;
 }
@@ -114,11 +153,13 @@ label{
   border-radius: 40px;
 }
 
-.ui-datepicker *{
-  border-radius: 10px;
+.ui-datepicker *,
+.ui-dropdown-panel .ui-dropdown-item,
+.ui-dropdown-panel .ui-dropdown-list{
+  border-radius: 10px!important;
   background-color: #002033!important;
-  border:none;
-  color: rgb(11, 222, 178);
+  border:none!important;
+  color: rgb(11, 222, 178)!important;
 }
 
 .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-highlight{
@@ -130,14 +171,16 @@ label{
   text-decoration: none;
 }
 
-.ui-togglebutton.ui-button.ui-state-default, .ui-selectbutton .ui-button.ui-state-default{
+.ui-togglebutton.ui-button.ui-state-default,
+.ui-selectbutton .ui-button.ui-state-default{
   border-radius: 50px!important;
   background-color: #002033!important;
   border:3px solid rgb(11, 222, 178)!important;
   color: rgb(11, 222, 178)!important;
 }
 
-.ui-togglebutton.ui-button.ui-state-default, .ui-selectbutton .ui-button.ui-state-active{
+.ui-togglebutton.ui-button.ui-state-default,
+.ui-selectbutton .ui-button.ui-state-active{
   background-image: linear-gradient(to bottom right,#69FF97, #00E4FF);
   border: none!important;
   color: #002033!important;
