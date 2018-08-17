@@ -21,12 +21,13 @@
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição</label>
-        <input pInputText type="text">
+        <input pInputText ngModel type="text" name="descricao" #descricao="ngModel" required minlength="5" [class]="descricao.dirty && descricao.invalid? 'input-invalid': 'ui-inputtext'" >
+        <div *ngIf="descricao.dirty && descricao.hasError('minlength')" class="validation-error-message">A descrição precisa ter no mínimo  {{ descricao.errors.minlength.requiredLength }} caracteres</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor</label>
-        <input pInputText type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
+        <input pInputText ngModel name="valor" type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">

@@ -77,6 +77,8 @@ label{
 
 .ui-inputtext,
 .ui-dropdown{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1em;
   color: #FFF;
   outline-style: none!important;
   background-color: transparent!important;
@@ -114,6 +116,26 @@ label{
   outline-style: none!important;
   box-shadow: none;
   border-bottom: 1px solid rgb(11, 222, 178)!important;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
+}
+
+.validation-error-message{
+  color: rgb(222, 88, 11);
+}
+
+.input-invalid{
+  color: rgb(222, 88, 11);
+  outline-style: none!important;
+  background-color: transparent;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1em;
+  width: 100%;
+  padding: .25em;
+  box-shadow: none;
+  border-bottom: 1px solid rgb(222, 88, 11)!important;
   border-left: 0;
   border-right: 0;
   border-top: 0;
