@@ -22,7 +22,7 @@
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição</label>
         <input pInputText ngModel type="text" name="descricao" #descricao="ngModel" required minlength="5" [class]="descricao.dirty && descricao.invalid? 'input-invalid': 'ui-inputtext'" >
-        <div *ngIf="descricao.dirty && descricao.hasError('minlength')" class="validation-error-message">A descrição precisa ter no mínimo  {{ descricao.errors.minlength.requiredLength }} caracteres</div>
+        <div *ngIf="descricao.hasError('minlength') && descricao.dirty" style="color: rgb(222, 88, 11);">A descricao precisa ter no mínimo {{ descricao.errors?.minlength?.requiredLength }} caracteres</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
