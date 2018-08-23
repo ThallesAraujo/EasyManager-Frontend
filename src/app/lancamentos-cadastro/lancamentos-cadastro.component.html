@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 <app-navbar [titulo]="'Adicionar Lançamento'"></app-navbar>
 <div class="container">
-  <form>
+  <form #lancamentoForm="ngForm" (submit)="None">
     <div class="ui-g">
 
       <label>Tipo</label>
@@ -11,7 +11,8 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar ngModel name="vencimento" #vencimento="ngModel" required dateFormat="dd/mm/yy" [class]="vencimento.dirty && vencimento.invalid? 'input-invalid': 'ui-inputtext'"></p-calendar>
+        <div *ngIf="vencimento.hasError('required') && vencimento.touched" style="color: rgb(222, 88, 11);">Informe uma data de vencimento</div>
       </div>
 
       <div class="ui-g-6 ui-fluid">
@@ -27,17 +28,17 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor</label>
-        <input pInputText ngModel name="valor" type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
+        <input pInputText required type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria</label>
-        <p-dropdown [options]="categorias" [autoWidth]="false" ></p-dropdown>
+        <p-dropdown required [options]="categorias" [autoWidth]="false"></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Pessoa</label>
-        <p-dropdown [options]="pessoas" [autoWidth]="false" [filter]="true" ></p-dropdown>
+        <p-dropdown required [options]="pessoas" [autoWidth]="false" [filter]="true" ></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
@@ -46,7 +47,7 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" [disabled]="lancamentoForm.invalid" label="Salvar"></button>
         <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
         <a href="#" class="return-link">Voltar a pesquisa</a>
       </div>

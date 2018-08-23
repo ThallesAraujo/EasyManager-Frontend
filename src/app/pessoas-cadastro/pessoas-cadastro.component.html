@@ -2,23 +2,26 @@
 <app-navbar [titulo]="'Adicionar Pessoa'"></app-navbar>
 <div class="container">
 
-  <form>
+  <form #pessoaForm="ngForm">
 
     <div class="ui-g">
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text">
+        <input pInputText required ngModel name="nome" #nome="ngModel" type="text" minlength="5" [class]="nome.dirty && nome.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="nome.hasError('minlength') && nome.dirty" style="color: rgb(222, 88, 11);">Informe um nome com no mínimo {{ nome.errors?.minlength?.requiredLength }} caracteres</div>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Logradouro</label>
-        <input pInputText type="text">
+        <input pInputText required ngModel name="logradouro" #logradouro="ngModel" type="text" [class]="logradouro.dirty && logradouro.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="logradouro.hasError('required') && logradouro.touched" style="color: rgb(222, 88, 11);">Informe um logradouro</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Número</label>
-        <input pInputText type="text">
+        <input pInputText required ngModel name="numero" #numero="ngModel" type="text" [class]="numero.dirty && numero.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="numero.hasError('required') && numero.touched" style="color: rgb(222, 88, 11);">Informe um número</div>
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
@@ -28,26 +31,30 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Bairro</label>
-        <input pInputText type="text">
+        <input pInputText type="text" required ngModel name="bairro" #bairro="ngModel" [class]="bairro.dirty && bairro.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="bairro.hasError('required') && bairro.touched" style="color: rgb(222, 88, 11);">Informe um bairro</div>
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>CEP</label>
-        <p-inputMask mask='99999-999'></p-inputMask>
+        <p-inputMask mask='99999-999' required ngModel name="cep" #cep="ngModel" [class]="cep.dirty && cep.invalid? 'input-invalid': 'ui-inputtext'"></p-inputMask>
+        <div *ngIf="cep.hasError('required') && cep.touched" style="color: rgb(222, 88, 11);">Informe um cep</div>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Cidade</label>
-        <input pInputText type="text">
+        <input pInputText type="text" required ngModel name="cidade" #cidade="ngModel" [class]="cidade.dirty && cidade.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="cidade.hasError('required') && cidade.touched" style="color: rgb(222, 88, 11);">Informe uma cidade</div>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Estado</label>
-        <input pInputText type="text">
+        <input pInputText type="text" required ngModel name="estado" #estado="ngModel" [class]="estado.dirty && estado.invalid? 'input-invalid': 'ui-inputtext'">
+        <div *ngIf="estado.hasError('required') && estado.touched" style="color: rgb(222, 88, 11);">Informe um estado</div>
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Salvar" [disabled]="pessoaForm.invalid"></button>
         <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
         <a href="#" class="return-link">Voltar a pesquisa</a>
       </div>
