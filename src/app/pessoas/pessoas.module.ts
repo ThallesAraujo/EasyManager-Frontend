@@ -14,8 +14,6 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { NavbarModule } from '../navbar/navbar.module';
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -33,8 +31,7 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
   ],
   declarations: [
     PessoasCadastroComponent,
-    PessoasPesquisaComponent,
-    PessoasGridComponent
+    PessoasPesquisaComponent
   ],
   exports: [
     PessoasCadastroComponent,

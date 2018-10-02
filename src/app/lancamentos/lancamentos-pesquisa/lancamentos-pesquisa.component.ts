@@ -1,46 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
+
+import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
+
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ErrorHandlerService } from '../../error-handler.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent {
+export class LancamentosPesquisaComponent implements OnInit {
 
-  lancamentos = [
-    {
-      tipo: 'DESPESA',
-      descricao: 'Conta de Água',
-      dataVencimento: new Date(2018, 7, 4),
-      dataPagamento: null,
-      valor: 24.75,
-      pessoa: 'CAGEPA'
-    },
-    {
-      tipo: 'RECEITA',
-      descricao: 'Salário',
-      dataVencimento: null,
-      dataPagamento: new Date(2018, 7, 25),
-      valor: 8570.22,
-      pessoa: 'Megadev S.A.'
-    },
-    {
-      tipo: 'DESPESA',
-      descricao: 'Supermercado',
-      dataVencimento: new Date(2018, 7, 4),
-      dataPagamento: null,
-      valor: 750.00,
-      pessoa: 'Supermercado Bom Demais'
-    },
-    {
-      tipo: 'DESPESA',
-      descricao: 'Conta de Luz',
-      dataVencimento: new Date(2018, 7, 6),
-      dataPagamento: new Date(2018, 7, 9),
-      valor: 24.75,
-      pessoa: 'Energisa S.A.'
-    }
-  ];
+  totalRegistros = 0;
+
+  filtro = new LancamentoFiltro();
+
+  lancamentos = [];
+
+  @ViewChild('tabela') grid;
+
+  constructor(private lancamentoService: LancamentoService,
+    private messageService: MessageService,
+    private errorHandler: ErrorHandlerService,
+    private confirmationService: ConfirmationService) {}
+
+ngOnInit() {
+  // Não necessário, o LazyLoad já chama o método de pesquisa
+  // this.pesquisar();
+}
+
+  pesquisar(pagina = 0) {
+
+    this.filtro.pagina = pagina;
+
+    this.lancamentoService.pesquisar(this.filtro)
+    .then(resposta => {
+      this.totalRegistros = resposta.total;
+      this.lancamentos = resposta.lancamentos;
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
 
   getStyle(tipo: string) {
     if (tipo === 'DESPESA') {
@@ -48,6 +50,33 @@ export class LancamentosPesquisaComponent {
     } else {
       return {'color': 'blue'};
     }
+  }
+
+  mudarPagina(event: LazyLoadEvent) {
+
+    const pagina = event.first / event.rows;
+
+    this.pesquisar(pagina);
+
+  }
+
+  exclusaoConfirmada(lancamento: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza de que deseja excluir ',
+      accept: () => {
+        this.excluir(lancamento);
+      },
+    });
+  }
+
+  excluir(lancamento: any) {
+    this.lancamentoService.excluir(lancamento.codigo)
+    .then( () => {
+      this.grid.first = 0;
+      this.pesquisar();
+      this.messageService.add({severity: 'success', detail: 'Lançamento excluído!'});
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

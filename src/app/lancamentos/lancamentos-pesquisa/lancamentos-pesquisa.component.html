@@ -1,37 +1,68 @@
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 <app-navbar [titulo]="'Lançamentos'"></app-navbar>
+<form (ngSubmit)="pesquisar() ">
 <div class="container">
   <div class="ui-g">
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+        <input type="text" pInputText name="descricao" [(ngModel)]="filtro.descricao">
+      </div>
 
-    <div class="ui-g-12 ui-fluid">
-      <label>Descrição</label>
-      <input type="text" pInputText>
+      <div class="ui-g-12">
+        <label style="display: block">Vencimento</label>
+        <p-calendar styleClass="datefield" dateFormat="dd/mm/yy" name="vencimentoInicio" [(ngModel)]="filtro.dataLancamentoInicio"></p-calendar>
+
+        <label style="padding: 10px">até</label>
+        <p-calendar styleClass="datefield" dateFormat="dd/mm/yy" name="vencimentoFim" [(ngModel)]="filtro.dataLancamentoFim" ></p-calendar>
+
+      </div>
+
+      <div class="ui-g-12">
+        <button type="submit" label="Pesquisar" pButton></button>
+      </div>
     </div>
-
-    <div class="ui-g-12">
-      <label style="display: block">Vencimento</label>
-      <input class="datefield" type="text" pInputText>
-
-      <label style="padding: 5px">até</label>
-      <input class="datefield" type="text" pInputText>
-
-    </div>
-
-    <div class="ui-g-12">
-      <button type="submit" label="Pesquisar" pButton></button>
-    </div>
-
+  </div>
+</form>
+<form>
+  <div class="container">
     <div class="ui-g">
 
       <div class="ui-g-12">
-        <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+        <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true" emptyMessage="Nenhum lançamento encontrado" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="mudarPagina($event)" #tabela>
+          <p-column field="pessoa" header="Pessoa"></p-column>
+          <p-column field="descricao" header="Descrição"></p-column>
+          <p-column field="dataVencimento" header="Vencimento" styleClass="col-data">
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <span >{{lanc.dataVencimento | date:'dd/MM/y'}}</span>
+            </ng-template>
+          </p-column>
+          <p-column field="dataPagamento" header="Pagamento" styleClass="col-data">
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <span >{{lanc.dataPagamento | date:'dd/MM/y'}}</span>
+            </ng-template>
+          </p-column>
+          <p-column field="valor" header="Valor" styleClass="col-valor">
+            <!-- Estilização dinâmica de linhas. Certificar-se sempre de colocar
+            dentro do p-column! -->
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <span [style.color]="lanc.tipo === 'DESPESA'? 'red' : 'green'" >{{lanc.valor | currency:'BRL':true:'1.2-2'}}</span>
+            </ng-template>
+          </p-column>
+          <p-column styleClass="col-opcoes">
+              <ng-template let-lanc="rowData" pTemplate="body">
+                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top"></a>
+                  <button pButton icon="fa fa-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top" (click)="exclusaoConfirmada(lanc)"></button>
+                </ng-template>
+          </p-column>
+        </p-dataTable>
       </div>
-
     </div>
-
+  </div>
+</form>
+<form>
+  <div class="container">
     <div class="ui-g-12">
       <a label="Novo Lançamento" pButton></a>
     </div>
-
   </div>
-</div>
+</form>

@@ -13,7 +13,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { NavbarModule } from '../navbar/navbar.module';
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
 
@@ -34,7 +33,6 @@ import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos
     CurrencyMaskModule
   ],
   declarations: [
-    LancamentosGridComponent,
     LancamentosPesquisaComponent,
     LancamentosCadastroComponent
   ],
