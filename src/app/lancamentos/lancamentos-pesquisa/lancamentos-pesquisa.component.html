@@ -50,7 +50,7 @@
           </p-column>
           <p-column styleClass="col-opcoes">
               <ng-template let-lanc="rowData" pTemplate="body">
-                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top"></a>
+                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/lancamentos', lanc.codigo]" ></a>
                   <button pButton icon="fa fa-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top" (click)="exclusaoConfirmada(lanc)"></button>
                 </ng-template>
           </p-column>
@@ -62,7 +62,7 @@
 <form>
   <div class="container">
     <div class="ui-g-12">
-      <a label="Novo Lançamento" pButton></a>
+      <a label="Novo Lançamento" routerLink="adicionar" pButton></a>
     </div>
   </div>
 </form>

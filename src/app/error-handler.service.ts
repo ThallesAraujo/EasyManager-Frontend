@@ -13,14 +13,12 @@ export class ErrorHandlerService {
 
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
-    } else{
-      msg = errorResponse;
+    } else {
+      const erros = JSON.parse(errorResponse._body);
+      msg = erros[0].mensagemUsuario;
+      //msg = errorResponse;
       console.log('Detalhes do erro:', errorResponse);
     }
-
-    //const erros = JSON.parse(errorResponse._body);
-    //msg = erros[0].mensagemUsuario;
-    //console.log('Detalhes do erro:', errorResponse);
 
     this.messageService.add({severity: 'error', detail: msg});
 

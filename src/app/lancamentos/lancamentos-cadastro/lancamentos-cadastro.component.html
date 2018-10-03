@@ -1,55 +1,55 @@
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
-<app-navbar [titulo]="'Adicionar Lançamento'"></app-navbar>
+<app-navbar [titulo]=" editando ? 'Editar Lançamento' : 'Novo Lançamento' "></app-navbar>
 <div class="container">
-  <form #lancamentoForm="ngForm" (submit)="None">
+  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)">
     <div class="ui-g">
 
       <label>Tipo</label>
       <div class="ui-g-12">
-        <p-selectButton [options]="tiposLancamento" #tipoLancamento></p-selectButton>
+        <p-selectButton [options]="tiposLancamento" name="tipo" [(ngModel)]="lancamento.tipo" #tipoLancamento></p-selectButton>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>Vencimento</label>
-        <p-calendar ngModel name="vencimento" #vencimento="ngModel" required dateFormat="dd/mm/yy" [class]="vencimento.dirty && vencimento.invalid? 'input-invalid': 'ui-inputtext'"></p-calendar>
+        <p-calendar ngModel [(ngModel)]="lancamento.dataVencimento" name="vencimento" #vencimento="ngModel" required dateFormat="dd/mm/yy" [class]="vencimento.dirty && vencimento.invalid? 'input-invalid': 'ui-inputtext'"></p-calendar>
         <div *ngIf="vencimento.hasError('required') && vencimento.touched" style="color: rgb(222, 88, 11);">Informe uma data de vencimento</div>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>{{ tipoLancamento.value === 'RECEITA'? 'Recebimento' : 'Pagamento' }}</label>
-        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar name="pagamento" [(ngModel)]="lancamento.dataPagamento" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição</label>
-        <input pInputText ngModel type="text" name="descricao" #descricao="ngModel" required minlength="5" [class]="descricao.dirty && descricao.invalid? 'input-invalid': 'ui-inputtext'" >
+        <input pInputText ngModel type="text" name="descricao" #descricao="ngModel" required minlength="5" [class]="descricao.dirty && descricao.invalid? 'input-invalid': 'ui-inputtext'" [(ngModel)]="lancamento.descricao" >
         <div *ngIf="descricao.hasError('minlength') && descricao.dirty" style="color: rgb(222, 88, 11);">A descricao precisa ter no mínimo {{ descricao.errors?.minlength?.requiredLength }} caracteres</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor</label>
-        <input pInputText required type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
+        <input pInputText name="valor" [(ngModel)]="lancamento.valor" required type="text" placeholder="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" currencyMask>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria</label>
-        <p-dropdown required [options]="categorias" [autoWidth]="false"></p-dropdown>
+        <p-dropdown name="categoria" [(ngModel)]="lancamento.categoria.codigo" required [options]="categorias" [autoWidth]="false"></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Pessoa</label>
-        <p-dropdown required [options]="pessoas" [autoWidth]="false" [filter]="true" ></p-dropdown>
+        <p-dropdown required [options]="pessoas" name="pessoa" [(ngModel)]="lancamento.pessoa.id" [autoWidth]="false" [filter]="true" ></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
         <label>Observação</label>
-        <textarea pInputTextarea rows="3"></textarea>
+        <textarea name="observacao" [(ngModel)]="lancamento.observacao" pInputTextarea rows="3"></textarea>
       </div>
 
       <div class="ui-g-12">
         <button pButton type="submit" [disabled]="lancamentoForm.invalid" label="Salvar"></button>
         <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
-        <a href="#" class="return-link">Voltar a pesquisa</a>
+        <a href="#" class="return-link" routerLink="../" >Voltar a pesquisa</a>
       </div>
 
     </div>

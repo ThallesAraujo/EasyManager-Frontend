@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
+import { Pessoa } from '../models/models';
 
 export class PessoaFiltro {
   nome: String;
@@ -56,7 +57,7 @@ export class PessoaService {
 
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(this.pessoasUrl)
+    return this.http.get(this.pessoasUrl, {headers})
     .toPromise()
     .then(response => response.json().content);
 
@@ -81,6 +82,16 @@ export class PessoaService {
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, {headers} )
     .toPromise()
     .then(() => null );
+  }
+
+  adicionar(pessoa: Pessoa) {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.pessoasUrl, pessoa, {headers})
+    .toPromise()
+    .then( response => response.json() );
 
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
+import { Lancamento } from '../models/models';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -65,6 +66,62 @@ export class LancamentoService {
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
     .toPromise()
     .then(() => null);
+  }
+
+  adicionar(lancamento: Lancamento): Promise<Lancamento> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+
+    return this.http.post(this.lancamentosUrl, lancamento, { headers })
+    .toPromise()
+    .then(response => response.json());
+  }
+
+  atualizar(lancamento: Lancamento): Promise<any> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
+    .toPromise()
+    .then( response => {
+      const lancamentoUp = response.json() as Lancamento;
+
+      this.lancamentosDatify([lancamentoUp]);
+
+      return lancamentoUp;
+
+    });
+
+  }
+
+  getLancamento(codigo: number): Promise<any> {
+
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers })
+    .toPromise()
+    .then( response => {
+      const lancamento = response.json() as Lancamento;
+
+      this.lancamentosDatify([lancamento]);
+
+      return lancamento;
+    });
+
+  }
+
+  private lancamentosDatify(lancamentos: Lancamento[]) {
+
+    for (const lancamento of lancamentos) {
+      lancamento.dataVencimento = moment(lancamento.dataVencimento, 'YYYY-MMM-DD').toDate();
+      if(lancamento.dataPagamento) {
+        lancamento.dataPagamento = moment(lancamento.dataPagamento, 'YYYY-MM-DD').toDate();
+      }
+    }
 
   }
 
