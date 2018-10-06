@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 <app-navbar [titulo]=" editando ? 'Editar Lançamento' : 'Novo Lançamento' "></app-navbar>
 <div class="container">
-  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)">
+  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)" >
     <div class="ui-g">
 
       <label>Tipo</label>
@@ -11,13 +11,13 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Vencimento</label>
-        <p-calendar ngModel [(ngModel)]="lancamento.dataVencimento" name="vencimento" #vencimento="ngModel" required dateFormat="dd/mm/yy" [class]="vencimento.dirty && vencimento.invalid? 'input-invalid': 'ui-inputtext'"></p-calendar>
+        <p-calendar ngModel [(ngModel)]="lancamento.dataVencimento" name="dataVencimento" #vencimento="ngModel" required dateFormat="dd/mm/yy" [class]="vencimento.dirty && vencimento.invalid? 'input-invalid': 'ui-inputtext'"></p-calendar>
         <div *ngIf="vencimento.hasError('required') && vencimento.touched" style="color: rgb(222, 88, 11);">Informe uma data de vencimento</div>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>{{ tipoLancamento.value === 'RECEITA'? 'Recebimento' : 'Pagamento' }}</label>
-        <p-calendar name="pagamento" [(ngModel)]="lancamento.dataPagamento" dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar name="dataPagamento" [(ngModel)]="lancamento.dataPagamento" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -48,7 +48,7 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" [disabled]="lancamentoForm.invalid" label="Salvar"></button>
-        <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
+        <button pButton type="button" label="Novo" styleClass="btn-secondary" (click)="novo(lancamentoForm)" ></button>
         <a href="#" class="return-link" routerLink="../" >Voltar a pesquisa</a>
       </div>
 

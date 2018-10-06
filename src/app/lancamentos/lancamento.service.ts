@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
 import { Lancamento } from '../models/models';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -18,7 +19,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private httpClient: HttpClient) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
@@ -63,7 +64,7 @@ export class LancamentoService {
   excluir(codigo: number): Promise<void> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, {headers})
     .toPromise()
     .then(() => null);
   }
@@ -79,20 +80,15 @@ export class LancamentoService {
     .then(response => response.json());
   }
 
-  atualizar(lancamento: Lancamento): Promise<any> {
+  atualizar(lancamento: Lancamento, codigo: number) {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
+    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}/`, lancamento, {headers})
     .toPromise()
     .then( response => {
-      const lancamentoUp = response.json() as Lancamento;
-
-      this.lancamentosDatify([lancamentoUp]);
-
-      return lancamentoUp;
-
+    return response.json();
     });
 
   }
@@ -118,7 +114,7 @@ export class LancamentoService {
 
     for (const lancamento of lancamentos) {
       lancamento.dataVencimento = moment(lancamento.dataVencimento, 'YYYY-MMM-DD').toDate();
-      if(lancamento.dataPagamento) {
+      if (lancamento.dataPagamento) {
         lancamento.dataPagamento = moment(lancamento.dataPagamento, 'YYYY-MM-DD').toDate();
       }
     }

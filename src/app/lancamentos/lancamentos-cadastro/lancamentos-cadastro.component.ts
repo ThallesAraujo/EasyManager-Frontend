@@ -6,7 +6,8 @@ import { Lancamento } from '../../models/models';
 import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lancamentos-cadastro',
@@ -33,7 +34,8 @@ export class LancamentosCadastroComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private pessoaService: PessoaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class LancamentosCadastroComponent implements OnInit {
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
+      console.log('Instanciou', this.lancamento);
     }
 
   }
@@ -60,14 +63,34 @@ export class LancamentosCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
     .then( () => {
       this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
-      form.reset();
-      this.lancamento = new Lancamento();
+
+      //form.reset();
+      //this.lancamento = new Lancamento();
+
+      this.router.navigate(['/lancamentos']);
+
     })
     .catch(erro => this.errorHandler.handle(erro));
     console.log(this.lancamento);
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento, this.lancamento.codigo)
+    .then( lanc => {
+      this.messageService.add({severity: 'success', detail: 'Lançamento editado com sucesso!'});
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
   getCategorias() {
@@ -90,5 +113,12 @@ export class LancamentosCadastroComponent implements OnInit {
     .catch( erro => this.errorHandler.handle(erro));
   }
 
+  novo(form: FormControl) {
+    form.reset();
+    setTimeout( function() {
+      this.lancamento = new Lancamento();
+    }.bind(this), 1 );
+    this.router.navigate(['/lancamentos/novo']);
+  }
 
 }
