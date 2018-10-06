@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
-<app-navbar [titulo]="'Adicionar Pessoa'"></app-navbar>
+<app-navbar [titulo]=" editando ? 'Editar Pessoa' : 'Adicionar Pessoa' "></app-navbar>
 <div class="container">
 
   <form #pessoaForm="ngForm" (ngSubmit)="salvar(pessoaForm)">
@@ -26,7 +26,7 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Complemento</label>
-        <input pInputText type="text">
+        <input pInputText name="complemento"  [(ngModel)]="pessoa.endereco.complemento"type="text">
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
@@ -55,8 +55,8 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="pessoaForm.invalid"></button>
-        <button pButton type="button" label="Novo" styleClass="btn-secondary"></button>
-        <a href="#" class="return-link">Voltar a pesquisa</a>
+        <button pButton type="button" label="Nova" styleClass="btn-secondary" (click)="nova(pessoaForm)"></button>
+        <a routerLink="../" class="return-link">Voltar a pesquisa</a>
       </div>
 
     </div>

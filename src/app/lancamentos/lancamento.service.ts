@@ -80,7 +80,7 @@ export class LancamentoService {
     .then(response => response.json());
   }
 
-  atualizar(lancamento: Lancamento, codigo: number) {
+  atualizar(lancamento: Lancamento) {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers.append('Content-Type', 'application/json');

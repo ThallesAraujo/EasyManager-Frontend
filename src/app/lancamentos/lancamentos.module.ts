@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,6 +15,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NavbarModule } from '../navbar/navbar.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
+import { AppLancamentosRoutingModule } from './lancamentos-routing-module';
 
 @NgModule({
   imports: [
@@ -32,15 +32,12 @@ import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos
     DropdownModule,
     FormsModule,
     CurrencyMaskModule,
-    RouterModule
+    AppLancamentosRoutingModule,
   ],
   declarations: [
     LancamentosPesquisaComponent,
     LancamentosCadastroComponent
   ],
-  exports:  [
-    LancamentosCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports:  []
 })
 export class LancamentosModule { }

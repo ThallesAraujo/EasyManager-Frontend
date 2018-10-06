@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamentos-cadastro',
@@ -35,6 +35,7 @@ export class LancamentosCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private pessoaService: PessoaService,
     private activatedRoute: ActivatedRoute,
+    private title: Title,
     private router: Router
   ) {}
 
@@ -46,6 +47,9 @@ export class LancamentosCadastroComponent implements OnInit {
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
       console.log('Instanciou', this.lancamento);
+      this.title.setTitle('Editar Lançamento');
+    } else {
+      this.title.setTitle('Adicionar Lançamento');
     }
 
   }
@@ -86,7 +90,7 @@ export class LancamentosCadastroComponent implements OnInit {
   }
 
   atualizarLancamento(form: FormControl) {
-    this.lancamentoService.atualizar(this.lancamento, this.lancamento.codigo)
+    this.lancamentoService.atualizar(this.lancamento)
     .then( lanc => {
       this.messageService.add({severity: 'success', detail: 'Lançamento editado com sucesso!'});
     })
@@ -118,7 +122,7 @@ export class LancamentosCadastroComponent implements OnInit {
     setTimeout( function() {
       this.lancamento = new Lancamento();
     }.bind(this), 1 );
-    this.router.navigate(['/lancamentos/novo']);
+    this.router.navigate(['/lancamentos/adicionar']);
   }
 
 }

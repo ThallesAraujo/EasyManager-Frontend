@@ -14,6 +14,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { NavbarModule } from '../navbar/navbar.module';
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { AppPessoasRoutingModule } from './pessoas-routing-module';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,15 +28,13 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
     SelectButtonModule,
     DropdownModule,
     InputMaskModule,
-    FormsModule
+    FormsModule,
+    AppPessoasRoutingModule
   ],
   declarations: [
     PessoasCadastroComponent,
     PessoasPesquisaComponent
   ],
-  exports: [
-    PessoasCadastroComponent,
-    PessoasPesquisaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }

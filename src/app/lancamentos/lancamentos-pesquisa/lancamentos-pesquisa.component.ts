@@ -6,6 +6,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ErrorHandlerService } from '../../error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -25,11 +26,13 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private confirmationService: ConfirmationService) {}
+    private confirmationService: ConfirmationService,
+    private title: Title) {}
 
 ngOnInit() {
   // Não necessário, o LazyLoad já chama o método de pesquisa
   // this.pesquisar();
+  this.title.setTitle('Lançamentos');
 }
 
   pesquisar(pagina = 0) {
