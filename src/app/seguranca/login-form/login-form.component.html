@@ -1,0 +1,10 @@
+<div class="access-container">
+  <h1 class="login-greeting">Bem vindo ao EasyManager!</h1>
+  <form class="login-form" (ngSubmit)="login(email.value, senha.value)" #loginForm="ngForm">
+    <div class="ui-g-12 ui-fluid">
+        <input pInputText type="text" required ngModel name="email" #email="ngModel" [class]="email.dirty && email.invalid? 'input-invalid': 'ui-inputtext'" placeholder="E-mail">
+        <input pPassword type="password" required name="senha" placeholder="Senha" #senha="ngModel" ngModel>
+    </div>
+      <button pButton type="submit" label="Entrar" class="ui-button" [disabled]="loginForm.invalid"></button>
+  </form>
+</div>

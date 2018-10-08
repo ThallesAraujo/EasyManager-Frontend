@@ -1,0 +1,23 @@
+.login-form{
+  display: grid;
+  left: auto;
+  right: auto;
+  width: 100%;
+}
+
+.login-greeting{
+  color: #69FF97;
+}
+
+
+.access-container{
+  display: grid;
+  position: absolute;
+  width: 30%;
+  top: 30%;
+  left: 10%;
+  background-image: linear-gradient(to bottom right,rgba(105, 255, 150, 0.24),
+  rgba(0, 229, 255, 0.425));
+  border-radius: 30px;
+  padding: 2%;
+}

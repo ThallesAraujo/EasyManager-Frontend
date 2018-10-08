@@ -16,7 +16,9 @@ import { LancamentoService } from './lancamentos/lancamento.service';
 import { PessoaService } from './pessoas/pessoa.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { ErrosModule } from './erros/erros.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing-module';
+import { OauthService } from './seguranca/oauth.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AppRoutingModule } from './app-routing-module';
     ToastModule,
     ConfirmDialogModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    SegurancaModule
   ],
   providers: [
     LancamentoService,
@@ -40,6 +43,7 @@ import { AppRoutingModule } from './app-routing-module';
     MessageService,
     ConfirmationService,
     ErrorHandlerService,
+    OauthService,
     Title
     /*TODO:precisa baixar os dados de locale*/
     /*{ provide: LOCALE_ID, useValue: 'pt-BR' }*/

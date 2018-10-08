@@ -7,7 +7,6 @@ const rotas: Routes = [
   { path: 'pessoas', component: PessoasPesquisaComponent },
   { path: 'pessoas/adicionar', component: PessoasCadastroComponent },
   { path: 'pessoas/:id', component: PessoasCadastroComponent },
-  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
