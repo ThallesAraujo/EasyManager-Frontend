@@ -19,6 +19,7 @@ import { ErrosModule } from './erros/erros.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing-module';
 import { OauthService } from './seguranca/oauth.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { OauthService } from './seguranca/oauth.service';
     MessageService,
     ConfirmationService,
     ErrorHandlerService,
+    JwtHelper,
     OauthService,
     Title
     /*TODO:precisa baixar os dados de locale*/
