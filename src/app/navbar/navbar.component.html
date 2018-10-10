@@ -12,9 +12,9 @@
 <ul class="navbar-menu" [hidden]="!mostrarMenu">
   <div>
     <a href="javascript:;" class="navbar-close-menu" (click)="mostrarMenu = !mostrarMenu"><i class="fa fa-arrow-left"></i></a>
-    <li class="navbar-menu-username">Usuário</li>
+    <li class="navbar-menu-username">{{ auth.payload?.nome }}</li>
   </div>
-  <li class="navbar-menu-menuitem" routerLinkActive="ativo" ><a routerLink="/lancamentos">Lançamentos</a></li>
-  <li class="navbar-menu-menuitem" routerLinkActive="ativo"><a routerLink="/pessoas">Pessoas</a></li>
+  <li class="navbar-menu-menuitem" routerLinkActive="ativo" ><a routerLink="/lancamentos" *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')">Lançamentos</a></li>
+  <li class="navbar-menu-menuitem" routerLinkActive="ativo"><a routerLink="/pessoas" *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')">Pessoas</a></li>
   <li class="navbar-menu-menuitem"><a href="#">Logout</a></li>
 </ul>

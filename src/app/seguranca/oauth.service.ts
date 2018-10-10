@@ -25,7 +25,7 @@ export class OauthService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const body = `&client=angular&username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauthUrl, body, { headers })
+    return this.http.post(this.oauthUrl, body, { headers , withCredentials: true})
     .toPromise()
     .then( response => {
       this.salvarToken(response.json().access_token);
@@ -47,6 +47,25 @@ export class OauthService {
   private salvarToken(token: string) {
      this.payload = this.helper.decodeToken(token);
      localStorage.setItem('token', token);
+  }
+
+  private temPermissao(permissao: string): Boolean {
+    return this.payload && this.payload.authorities.includes(permissao);
+  }
+  private obterNovoAccessToken(): Promise<void> {
+    const headers = new Headers();
+
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthUrl, body, {headers, withCredentials: true})
+    .toPromise()
+    .then(response => {
+      this.salvarToken(response.json().access_token);
+      console.log('Access token criado!');
+    })
+    .catch(error => console.log('Erro ao obter novo access token', error));
   }
 
   private carregarToken() {

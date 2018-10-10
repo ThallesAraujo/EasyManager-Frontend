@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { OauthService } from '../seguranca/oauth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent {
 
   @Input() titulo = 'EasyManager';
+
+  constructor(private auth: OauthService) {};
 
 }
