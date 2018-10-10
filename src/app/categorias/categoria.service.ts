@@ -14,7 +14,9 @@ export class CategoriaService {
 
     const headers = new Headers();
 
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.get(this.categoriasUrl, { headers })
     .toPromise()

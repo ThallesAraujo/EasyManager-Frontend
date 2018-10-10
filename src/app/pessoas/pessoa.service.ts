@@ -31,7 +31,9 @@ export class PessoaService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.get(this.pessoasUrl, {headers, search: params})
     .toPromise()
@@ -55,8 +57,9 @@ export class PessoaService {
 
     const headers = new Headers();
 
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
 
+    headers.append('Authorization', `Bearer ${token}`);
     return this.http.get(this.pessoasUrl, {headers})
     .toPromise()
     .then(response => response.json().content);
@@ -66,7 +69,9 @@ export class PessoaService {
   excluir(codigo: number): Promise<any> {
 
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.delete(`${this.pessoasUrl}/${codigo}`, {headers})
     .toPromise()
@@ -76,7 +81,9 @@ export class PessoaService {
 
   mudarStatus(codigo: number, ativo: boolean): Promise<any> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
     headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, {headers} )
@@ -86,7 +93,9 @@ export class PessoaService {
 
   adicionar(pessoa: Pessoa) {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
     headers.append('Content-Type', 'application/json');
 
     return this.http.post(this.pessoasUrl, pessoa, {headers})
@@ -97,7 +106,9 @@ export class PessoaService {
 
   atualizar(pessoa: Pessoa) {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
     headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.pessoasUrl}/${pessoa.id}/`, pessoa, {headers})
@@ -111,7 +122,9 @@ export class PessoaService {
   getPessoa(id: number): Promise<any> {
 
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.get(`${this.pessoasUrl}/${id}`, { headers })
     .toPromise()

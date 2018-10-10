@@ -3,6 +3,7 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
 import { Lancamento } from '../models/models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthHttp } from 'angular2-jwt';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -43,7 +44,9 @@ export class LancamentoService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, search: params })
     .toPromise()
@@ -63,7 +66,9 @@ export class LancamentoService {
 
   excluir(codigo: number): Promise<void> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, {headers})
     .toPromise()
     .then(() => null);
@@ -71,7 +76,10 @@ export class LancamentoService {
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
+
     headers.append('Content-Type', 'application/json');
 
 
@@ -82,7 +90,10 @@ export class LancamentoService {
 
   atualizar(lancamento: Lancamento) {
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
+
     headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}/`, lancamento, {headers})
@@ -96,7 +107,9 @@ export class LancamentoService {
   getLancamento(codigo: number): Promise<any> {
 
     const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const token = localStorage.getItem('token');
+
+    headers.append('Authorization', `Bearer ${token}`);
 
     return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers })
     .toPromise()

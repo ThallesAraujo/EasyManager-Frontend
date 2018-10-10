@@ -51,6 +51,8 @@ export class OauthService {
 
   private carregarToken() {
     const token = localStorage.getItem('token');
+    console.log(localStorage.getItem('token'));
+
 
     if (token) {
       this.salvarToken(token);

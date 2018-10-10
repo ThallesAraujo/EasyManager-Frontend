@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import { FormsModule } from '@angular/forms';
+import { Http, RequestOptions } from '@angular/http';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { FormsModule } from '@angular/forms';
     ButtonModule
   ],
   declarations: [LoginFormComponent],
-  exports: [LoginFormComponent]
+  exports: [LoginFormComponent],
 })
 export class SegurancaModule { }
