@@ -52,7 +52,8 @@ export class OauthService {
   private temPermissao(permissao: string): Boolean {
     return this.payload && this.payload.authorities.includes(permissao);
   }
-  private obterNovoAccessToken(): Promise<void> {
+
+  obterNovoAccessToken(): Promise<void> {
     const headers = new Headers();
 
     headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
@@ -66,6 +67,13 @@ export class OauthService {
       console.log('Access token criado!');
     })
     .catch(error => console.log('Erro ao obter novo access token', error));
+  }
+
+  tokenExpirado() {
+
+    const token = localStorage.getItem('token');
+    return !token || this.helper.isTokenExpired(token);
+
   }
 
   private carregarToken() {

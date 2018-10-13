@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams, Headers } from '@angular/http';
+import { URLSearchParams, Headers } from '@angular/http';
 import { Pessoa } from '../models/models';
+import { ManagerHttp } from '../seguranca/manager-http';
 
 export class PessoaFiltro {
   nome: String;
@@ -16,7 +17,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
 
-  constructor(private http: Http) { }
+  constructor(private http: ManagerHttp) { }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
 
@@ -40,11 +41,11 @@ export class PessoaService {
     .then(response => {
 
       const responseJson = response.json();
-      const resultSet = responseJson.content;
+      const resultSet = responseJson['content'];
 
       const resposta = {
         pessoas: resultSet,
-        total: responseJson.totalElements
+        total: responseJson['totalElements']
       };
 
       return resposta;
@@ -62,7 +63,7 @@ export class PessoaService {
     headers.append('Authorization', `Bearer ${token}`);
     return this.http.get(this.pessoasUrl, {headers})
     .toPromise()
-    .then(response => response.json().content);
+    .then(response => response.json()['content']);
 
   }
 

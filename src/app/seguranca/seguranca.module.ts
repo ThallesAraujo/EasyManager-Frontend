@@ -6,10 +6,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import { FormsModule } from '@angular/forms';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, HttpModule } from '@angular/http';
+import { ManagerHttp } from './manager-http';
 
 @NgModule({
   imports: [
+    HttpModule,
     CommonModule,
     FormsModule,
     AppSegurancaRoutingModule,
@@ -19,5 +21,6 @@ import { Http, RequestOptions } from '@angular/http';
   ],
   declarations: [LoginFormComponent],
   exports: [LoginFormComponent],
+  providers: [ManagerHttp]
 })
 export class SegurancaModule { }

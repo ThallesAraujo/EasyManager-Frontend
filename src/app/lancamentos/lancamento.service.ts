@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Headers, URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
 import { Lancamento } from '../models/models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthHttp } from 'angular2-jwt';
+import { ManagerHttp } from '../seguranca/manager-http';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -20,7 +19,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: Http, private httpClient: HttpClient) { }
+  constructor(private http: ManagerHttp) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
@@ -52,11 +51,11 @@ export class LancamentoService {
     .toPromise()
     .then(response => {
       const responseJson = response.json();
-      const resultSet = responseJson.content;
+      const resultSet = responseJson['content'];
 
       const resposta = {
         lancamentos: resultSet,
-        total: responseJson.totalElements
+        total: responseJson['totalElements']
       };
 
       return resposta;

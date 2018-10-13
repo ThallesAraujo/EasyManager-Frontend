@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpModule, ConnectionBackend, RequestOptions } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,6 +20,7 @@ import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing-module';
 import { OauthService } from './seguranca/oauth.service';
 import { JwtHelper } from 'angular2-jwt';
+import { ManagerHttp } from './seguranca/manager-http';
 
 @NgModule({
   declarations: [

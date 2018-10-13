@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Headers } from '@angular/http';
+import { ManagerHttp } from '../seguranca/manager-http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class CategoriaService {
 
   categoriasUrl = 'http://localhost:8080/categorias';
 
-  constructor(private http: Http) { }
+  constructor(private http: ManagerHttp) { }
 
   listarTodas(): Promise<any> {
 

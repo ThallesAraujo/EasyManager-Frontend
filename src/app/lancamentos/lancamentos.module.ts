@@ -32,7 +32,7 @@ import { AppLancamentosRoutingModule } from './lancamentos-routing-module';
     DropdownModule,
     FormsModule,
     CurrencyMaskModule,
-    AppLancamentosRoutingModule,
+    AppLancamentosRoutingModule
   ],
   declarations: [
     LancamentosPesquisaComponent,
