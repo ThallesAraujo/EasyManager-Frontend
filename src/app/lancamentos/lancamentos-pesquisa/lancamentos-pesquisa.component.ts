@@ -7,6 +7,8 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ErrorHandlerService } from '../../error-handler.service';
 import { Title } from '@angular/platform-browser';
+import { Lancamento } from 'src/app/models/models';
+import { OauthService } from 'src/app/seguranca/oauth.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -24,6 +26,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(private lancamentoService: LancamentoService,
+    private auth: OauthService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private confirmationService: ConfirmationService,
@@ -39,12 +42,20 @@ ngOnInit() {
 
     this.filtro.pagina = pagina;
 
-    this.lancamentoService.pesquisar(this.filtro)
+    /*this.lancamentoService.pesquisar(this.filtro)
     .then(resposta => {
       this.totalRegistros = resposta.total;
       this.lancamentos = resposta.lancamentos;
     })
-    .catch(erro => this.errorHandler.handle(erro));
+    .catch(erro => this.errorHandler.handle(erro));*/
+
+    this.lancamentoService.getLancamentos(this.filtro)
+    .subscribe( lancamentos => {
+      this.lancamentos = lancamentos.content;
+      this.totalRegistros = lancamentos.totalElements;
+      console.log(lancamentos);
+    });
+
   }
 
   getStyle(tipo: string) {

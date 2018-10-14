@@ -50,8 +50,8 @@
           </p-column>
           <p-column styleClass="col-opcoes">
               <ng-template let-lanc="rowData" pTemplate="body">
-                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/lancamentos', lanc.codigo]" ></a>
-                  <button pButton icon="fa fa-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top" (click)="exclusaoConfirmada(lanc)"></button>
+                  <a pButton icon="fa fa-pencil" style="margin: 5px;" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/lancamentos', lanc.codigo]" *ngIf="auth.temPermissao('ROLE_CADASTRAR_LANCAMENTO')"></a>
+                  <button pButton icon="fa fa-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top" (click)="exclusaoConfirmada(lanc)" [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')"></button>
                 </ng-template>
           </p-column>
         </p-dataTable>

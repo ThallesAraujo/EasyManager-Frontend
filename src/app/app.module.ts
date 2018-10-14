@@ -1,7 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule, ConnectionBackend, RequestOptions } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastModule } from 'primeng/toast';
@@ -21,6 +20,8 @@ import { AppRoutingModule } from './app-routing-module';
 import { OauthService } from './seguranca/oauth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { ManagerHttp } from './seguranca/manager-http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './seguranca/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,12 @@ import { ManagerHttp } from './seguranca/manager-http';
     ErrorHandlerService,
     JwtHelper,
     OauthService,
-    Title
+    Title,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
     /*TODO:precisa baixar os dados de locale*/
     /*{ provide: LOCALE_ID, useValue: 'pt-BR' }*/
   ],

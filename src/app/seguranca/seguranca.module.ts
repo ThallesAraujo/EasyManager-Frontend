@@ -8,6 +8,7 @@ import {PasswordModule} from 'primeng/password';
 import { FormsModule } from '@angular/forms';
 import { Http, RequestOptions, HttpModule } from '@angular/http';
 import { ManagerHttp } from './manager-http';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { ManagerHttp } from './manager-http';
   ],
   declarations: [LoginFormComponent],
   exports: [LoginFormComponent],
-  providers: [ManagerHttp]
+  providers: [ManagerHttp, AuthGuard]
 })
 export class SegurancaModule { }

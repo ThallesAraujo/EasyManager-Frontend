@@ -3,6 +3,10 @@ import { Headers, URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
 import { Lancamento } from '../models/models';
 import { ManagerHttp } from '../seguranca/manager-http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -19,7 +23,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: ManagerHttp) { }
+  constructor(private http: ManagerHttp, private client: HttpClient) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
@@ -61,6 +65,35 @@ export class LancamentoService {
       return resposta;
 
     });
+  }
+
+
+  getLancamentos(filtro: LancamentoFiltro): Observable<any> {
+
+    const lancFilter = {};
+
+    if (filtro.descricao) {
+      lancFilter['descricao'] = filtro.descricao;
+    }
+
+    if (filtro.dataLancamentoInicio) {
+      lancFilter['dataVencimentoDe'] =  moment(filtro.dataLancamentoInicio).format('YYYY-MM-DD');
+    }
+
+    if (filtro.dataLancamentoFim) {
+      lancFilter['dataVencimentoAte'] =  moment(filtro.dataLancamentoFim).format('YYYY-MM-DD');
+    }
+
+    lancFilter['page'] = filtro.pagina.toString();
+    lancFilter['size'] =  filtro.itensPorPagina.toString();
+
+    const httpParamsOptions: HttpParamsOptions = { fromObject: lancFilter } as HttpParamsOptions;
+
+    const httpOptions = {
+      params: new HttpParams(httpParamsOptions)
+    };
+
+    return this.client.get(`${this.lancamentosUrl}?resumo`, httpOptions);
   }
 
   excluir(codigo: number): Promise<void> {
