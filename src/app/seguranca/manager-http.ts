@@ -2,6 +2,7 @@ import { Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Request, R
 import { Observable } from 'rxjs';
 import { OauthService } from './oauth.service';
 import { Injectable } from '@angular/core';
+import { ExpiredSessionError } from './auth-interceptor';
 
 @Injectable()
 export class ManagerHttp {
@@ -42,6 +43,11 @@ export class ManagerHttp {
       console.log('Obtendo novo access token..');
 
       this.oauth.obterNovoAccessToken();
+
+      if (this.oauth.tokenExpirado()) {
+        throw new ExpiredSessionError();
+      }
+
     }
       return fn();
 

@@ -8,6 +8,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export class ExpiredSessionError{}
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -17,6 +19,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (this.oauth.tokenExpirado()) {
       this.oauth.obterNovoAccessToken();
+      if (this.oauth.tokenExpirado()) {
+        throw new ExpiredSessionError();
+      }
     }
     request = request.clone({
       setHeaders: {

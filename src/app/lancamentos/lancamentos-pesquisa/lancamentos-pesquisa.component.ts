@@ -54,7 +54,7 @@ ngOnInit() {
       this.lancamentos = lancamentos.content;
       this.totalRegistros = lancamentos.totalElements;
       console.log(lancamentos);
-    });
+    }, error => this.errorHandler.handle(error));
 
   }
 

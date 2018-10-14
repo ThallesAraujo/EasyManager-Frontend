@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { Http, RequestOptions, HttpModule } from '@angular/http';
 import { ManagerHttp } from './manager-http';
 import { AuthGuard } from './auth.guard';
+import { ExpiredSessionError } from './auth-interceptor';
 
 @NgModule({
   imports: [
