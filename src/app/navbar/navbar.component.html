@@ -16,5 +16,5 @@
   </div>
   <li class="navbar-menu-menuitem" routerLinkActive="ativo" ><a routerLink="/lancamentos" *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')">Lançamentos</a></li>
   <li class="navbar-menu-menuitem" routerLinkActive="ativo"><a routerLink="/pessoas" *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')">Pessoas</a></li>
-  <li class="navbar-menu-menuitem"><a href="#">Logout</a></li>
+  <li class="navbar-menu-menuitem"><a href="#" (click)="logout()" >Logout</a></li>
 </ul>

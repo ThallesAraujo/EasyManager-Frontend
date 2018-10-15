@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private oauth: OauthService) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (this.oauth.tokenExpirado()) {
       this.oauth.obterNovoAccessToken();

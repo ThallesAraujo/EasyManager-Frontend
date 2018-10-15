@@ -10,6 +10,7 @@ import { Http, RequestOptions, HttpModule } from '@angular/http';
 import { ManagerHttp } from './manager-http';
 import { AuthGuard } from './auth.guard';
 import { ExpiredSessionError } from './auth-interceptor';
+import { LogoutService } from './logout.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { ExpiredSessionError } from './auth-interceptor';
   ],
   declarations: [LoginFormComponent],
   exports: [LoginFormComponent],
-  providers: [ManagerHttp, AuthGuard]
+  providers: [ManagerHttp, AuthGuard, LogoutService]
 })
 export class SegurancaModule { }

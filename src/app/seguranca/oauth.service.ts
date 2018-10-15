@@ -53,6 +53,11 @@ export class OauthService {
     return this.payload && this.payload.authorities.includes(permissao);
   }
 
+  limparToken() {
+    localStorage.removeItem('token');
+    this.payload = null;
+  }
+
   temPermissaoRequerida(roles) {
     for (const role of roles) {
       if (this.temPermissao(role)) {
