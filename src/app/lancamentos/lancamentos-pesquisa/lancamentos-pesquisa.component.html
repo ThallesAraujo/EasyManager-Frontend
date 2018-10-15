@@ -45,7 +45,7 @@
             <!-- Estilização dinâmica de linhas. Certificar-se sempre de colocar
             dentro do p-column! -->
             <ng-template let-lanc="rowData" pTemplate="body">
-              <span [style.color]="lanc.tipo === 'DESPESA'? 'red' : 'green'" >{{lanc.valor | currency:'BRL':true:'1.2-2'}}</span>
+              <span [style.color]="lanc.tipo === 'DESPESA'? 'red' : 'green'" >{{lanc.valor | currency:'BRL'}}</span>
             </ng-template>
           </p-column>
           <p-column styleClass="col-opcoes">
