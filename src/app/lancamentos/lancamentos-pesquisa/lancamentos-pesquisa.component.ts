@@ -85,12 +85,11 @@ ngOnInit() {
 
   excluir(lancamento: any) {
     this.lancamentoService.excluir(lancamento.codigo)
-    .then( () => {
+    .subscribe( () => {
       this.grid.first = 0;
       this.pesquisar();
       this.messageService.add({severity: 'success', detail: 'Lançamento excluído!'});
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    }, erro => this.errorHandler.handle(erro));
   }
 
 }

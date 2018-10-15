@@ -32,9 +32,9 @@ export class PessoasPesquisaComponent implements OnInit {
     this.filtro.pagina = pagina;
 
     this.pessoaService.pesquisar(this.filtro)
-    .then(resposta => {
-      this.totalRegistros = resposta.total;
-      this.pessoas = resposta.pessoas;
+    .subscribe(resposta => {
+      this.totalRegistros = resposta.totalElements;
+      this.pessoas = resposta.content;
     });
   }
 
@@ -57,34 +57,34 @@ export class PessoasPesquisaComponent implements OnInit {
   excluir(pessoa: any) {
 
     this.pessoaService.excluir(pessoa.id)
-    .then( () => {
+    .subscribe( () => {
       this.grid.first = 0;
       this.pesquisar();
       this.messageService.add({severity: 'success', detail: 'Pessoa excluída!'});
 
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    },
+    erro => this.errorHandler.handle(erro));
 
   }
 
   mudarStatus(pessoa: any) {
     if (pessoa.ativo) {
       this.pessoaService.mudarStatus(pessoa.id, false)
-      .then( () => {
+      .subscribe( () => {
         this.grid.first = 0;
         this.pesquisar();
         this.messageService.add({severity: 'success', detail: 'Pessoa desativada!'});
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+      },
+      erro => this.errorHandler.handle(erro));
 
     } else {
       this.pessoaService.mudarStatus(pessoa.id, true)
-      .then( () => {
+      .subscribe( () => {
         this.grid.first = 0;
         this.pesquisar();
         this.messageService.add({severity: 'success', detail: 'Pessoa ativada!'});
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+      },
+      erro => this.errorHandler.handle(erro));
     }
   }
 

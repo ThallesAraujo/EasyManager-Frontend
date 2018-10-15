@@ -6,6 +6,7 @@ export class Pessoa {
 
 export class Categoria {
   codigo: number;
+  nome: String;
 }
 
 export class Lancamento {

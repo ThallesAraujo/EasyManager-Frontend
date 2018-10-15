@@ -76,7 +76,7 @@ export class LancamentosCadastroComponent implements OnInit {
 
   adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
-    .then( () => {
+    .subscribe( () => {
       this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
 
       //form.reset();
@@ -84,37 +84,34 @@ export class LancamentosCadastroComponent implements OnInit {
 
       this.router.navigate(['/lancamentos']);
 
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    }, erro => this.errorHandler.handle(erro))
     console.log(this.lancamento);
   }
 
   atualizarLancamento(form: FormControl) {
     this.lancamentoService.atualizar(this.lancamento)
-    .then( lanc => {
+    .subscribe( lanc => {
       this.messageService.add({severity: 'success', detail: 'Lançamento editado com sucesso!'});
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    }, erro => this.errorHandler.handle(erro));
   }
 
   getCategorias() {
     return this.categoriaService.listarTodas()
-    .then( categorias => {
+    .subscribe(categorias => {
       this.categorias = categorias.map(cat => {
         return { label: cat.nome, value: cat.codigo };
       });
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    }, error => this.errorHandler.handle(error));
   }
 
   getPessoas() {
     return this.pessoaService.listarTodas()
-    .then( pessoas => {
+    .subscribe( pessoas => {
       this.pessoas = pessoas.map( ps => {
         return { label: ps.nome, value: ps.id }
       });
-    })
-    .catch( erro => this.errorHandler.handle(erro));
+    },
+    erro => this.errorHandler.handle(erro));
   }
 
   novo(form: FormControl) {

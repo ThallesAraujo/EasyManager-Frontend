@@ -17,7 +17,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (this.oauth.tokenExpirado()) {
+    if (!localStorage.getItem('token')) {
+      throw new ExpiredSessionError();
+    } else if (this.oauth.tokenExpirado()) {
       this.oauth.obterNovoAccessToken();
       if (this.oauth.tokenExpirado()) {
         throw new ExpiredSessionError();

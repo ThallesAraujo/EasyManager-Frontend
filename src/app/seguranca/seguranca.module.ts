@@ -6,10 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import { FormsModule } from '@angular/forms';
-import { Http, RequestOptions, HttpModule } from '@angular/http';
-import { ManagerHttp } from './manager-http';
+import { HttpModule } from '@angular/http';
 import { AuthGuard } from './auth.guard';
-import { ExpiredSessionError } from './auth-interceptor';
 import { LogoutService } from './logout.service';
 
 @NgModule({
@@ -24,6 +22,6 @@ import { LogoutService } from './logout.service';
   ],
   declarations: [LoginFormComponent],
   exports: [LoginFormComponent],
-  providers: [ManagerHttp, AuthGuard, LogoutService]
+  providers: [AuthGuard, LogoutService]
 })
 export class SegurancaModule { }

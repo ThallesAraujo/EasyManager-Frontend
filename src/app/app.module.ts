@@ -19,7 +19,6 @@ import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing-module';
 import { OauthService } from './seguranca/oauth.service';
 import { JwtHelper } from 'angular2-jwt';
-import { ManagerHttp } from './seguranca/manager-http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './seguranca/auth-interceptor';
 

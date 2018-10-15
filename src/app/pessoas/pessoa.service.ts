@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { URLSearchParams, Headers } from '@angular/http';
 import { Pessoa } from '../models/models';
-import { ManagerHttp } from '../seguranca/manager-http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpParamsOptions } from '@angular/common/http/src/params';
+import { Observable } from 'rxjs';
 
 export class PessoaFiltro {
   nome: String;
@@ -17,121 +18,74 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
 
-  constructor(private http: ManagerHttp) { }
+  constructor(private client: HttpClient) { }
 
-  pesquisar(filtro: PessoaFiltro): Promise<any> {
+  pesquisar(filtro: PessoaFiltro): Observable<any> {
 
-    const params = new URLSearchParams();
-
-    const headers = new Headers();
-
+    const pessoaFiltro = {};
     if (filtro.nome) {
-      params.set('nome', filtro.nome.toString());
+      pessoaFiltro['nome'] = filtro.nome.toString();
     }
+    pessoaFiltro['page'] = filtro.pagina.toString();
+    pessoaFiltro['size'] =  filtro.itensPorPagina.toString();
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    const httpParamsOptions: HttpParamsOptions = { fromObject: pessoaFiltro } as HttpParamsOptions;
 
-    const token = localStorage.getItem('token');
+    const httpOptions = {
+      params: new HttpParams(httpParamsOptions)
+    };
 
-    headers.append('Authorization', `Bearer ${token}`);
-
-    return this.http.get(this.pessoasUrl, {headers, search: params})
-    .toPromise()
-    .then(response => {
-
-      const responseJson = response.json();
-      const resultSet = responseJson['content'];
-
-      const resposta = {
-        pessoas: resultSet,
-        total: responseJson['totalElements']
-      };
-
-      return resposta;
-
-    });
+    return this.client.get(`${this.pessoasUrl}?resumo`, httpOptions);
 
   }
 
-  listarTodas(): Promise<any> {
+  listarTodas(): Observable<Pessoa[]> {
 
-    const headers = new Headers();
-
-    const token = localStorage.getItem('token');
-
-    headers.append('Authorization', `Bearer ${token}`);
-    return this.http.get(this.pessoasUrl, {headers})
-    .toPromise()
-    .then(response => response.json()['content']);
+    return this.client.get<Pessoa[]>(this.pessoasUrl);
 
   }
 
-  excluir(codigo: number): Promise<any> {
+  excluir(codigo: number): Observable<any> {
 
-    const headers = new Headers();
-    const token = localStorage.getItem('token');
-
-    headers.append('Authorization', `Bearer ${token}`);
-
-    return this.http.delete(`${this.pessoasUrl}/${codigo}`, {headers})
-    .toPromise()
-    .then( () => null);
+    return this.client.delete(`${this.pessoasUrl}/${codigo}`);
 
   }
 
-  mudarStatus(codigo: number, ativo: boolean): Promise<any> {
-    const headers = new Headers();
-    const token = localStorage.getItem('token');
+  mudarStatus(codigo: number, ativo: boolean): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
 
-    headers.append('Authorization', `Bearer ${token}`);
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, {headers} )
-    .toPromise()
-    .then(() => null );
+    return this.client.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, options );
   }
 
-  adicionar(pessoa: Pessoa) {
-    const headers = new Headers();
-    const token = localStorage.getItem('token');
+  adicionar(pessoa: Pessoa): Observable<Pessoa> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
 
-    headers.append('Authorization', `Bearer ${token}`);
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(this.pessoasUrl, pessoa, {headers})
-    .toPromise()
-    .then( response => response.json() );
+    return this.client.post<Pessoa>(this.pessoasUrl, pessoa, options);
 
   }
 
-  atualizar(pessoa: Pessoa) {
-    const headers = new Headers();
-    const token = localStorage.getItem('token');
+  atualizar(pessoa: Pessoa): Observable<Pessoa> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
 
-    headers.append('Authorization', `Bearer ${token}`);
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.pessoasUrl}/${pessoa.id}/`, pessoa, {headers})
-    .toPromise()
-    .then( response => {
-    return response.json();
-    });
+    return this.client.put<Pessoa>(`${this.pessoasUrl}/${pessoa.id}/`, pessoa, options);
 
   }
 
-  getPessoa(id: number): Promise<any> {
+  getPessoa(id: number): Observable<Pessoa> {
 
-    const headers = new Headers();
-    const token = localStorage.getItem('token');
-
-    headers.append('Authorization', `Bearer ${token}`);
-
-    return this.http.get(`${this.pessoasUrl}/${id}`, { headers })
-    .toPromise()
-    .then( response => {
-      return response.json();
-    });
+    return this.client.get<Pessoa>(`${this.pessoasUrl}/${id}`);
 
   }
 

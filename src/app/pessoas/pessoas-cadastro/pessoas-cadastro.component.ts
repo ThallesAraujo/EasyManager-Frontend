@@ -42,8 +42,8 @@ export class PessoasCadastroComponent implements OnInit {
 
   carregarPessoa(id: number) {
     this.pessoaService.getPessoa(id)
-    .then(pessoa => this.pessoa = pessoa)
-    .catch(erro => this.errorHandler.handle(erro));
+    .subscribe(pessoa => this.pessoa = pessoa,
+    erro => this.errorHandler.handle(erro));
   }
 
   salvar(form: FormControl) {
@@ -56,19 +56,19 @@ export class PessoasCadastroComponent implements OnInit {
 
   adicionarPessoa(form: FormControl) {
     this.pessoaService.adicionar(this.pessoa)
-    .then( () => {
+    .subscribe( () => {
       this.messageService.add({severity: 'success', detail: 'Pessoa adicionada com sucesso!'});
       this.router.navigate(['/pessoas']);
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    },
+    erro => this.errorHandler.handle(erro));
   }
 
   atualizarPessoa(form: FormControl) {
     this.pessoaService.atualizar(this.pessoa)
-    .then( () => {
+    .subscribe( () => {
       this.messageService.add({severity: 'success', detail: 'Pessoa atualizada com sucesso!'});
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    },
+    erro => this.errorHandler.handle(erro));
   }
 
   nova(form: FormControl) {
