@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule, ConnectionBackend, RequestOptions } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {LOCALE_ID} from '@angular/core';
@@ -49,10 +49,10 @@ registerLocaleData(localePt);
     PessoaService,
     MessageService,
     ConfirmationService,
-    ErrorHandlerService,
     JwtHelper,
     OauthService,
     Title,
+    ErrorHandlerService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

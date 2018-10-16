@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ForbidenComponent } from './forbiden/forbiden.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   imports: [
@@ -9,7 +9,7 @@ import { ForbidenComponent } from './forbiden/forbiden.component';
   ],
   declarations: [
     NotFoundComponent,
-    ForbidenComponent
+    ForbiddenComponent
   ],
   exports: [
     NotFoundComponent

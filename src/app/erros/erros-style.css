@@ -1,0 +1,19 @@
+h1{
+  color: #69FF97;
+}
+
+h2, h3{
+  color: aquamarine;
+}
+
+.padded{
+  padding: 5%;
+}
+
+.fa-ban{
+  position: absolute;
+  right: 10px;
+  top: 10%;
+  font-size: 500px;
+  color: rgba(0, 255, 76, 0.164);
+}

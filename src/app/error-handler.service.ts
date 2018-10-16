@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OauthService } from './seguranca/oauth.service';
@@ -12,7 +12,6 @@ export class ErrorHandlerService {
 
   constructor(
     private messageService: MessageService,
-    private oauth: OauthService,
     private router: Router
     ) { }
 
@@ -44,9 +43,7 @@ export class ErrorHandlerService {
       msg = 'Erro ao processar serviço remoto. Tente atualizar a página';
       console.error('Houve um erro', errorResponse);
     }
-
     this.messageService.add({severity: 'error', detail: msg});
-
   }
 
 }

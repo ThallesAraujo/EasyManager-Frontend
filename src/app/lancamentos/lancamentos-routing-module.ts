@@ -22,7 +22,7 @@ const rotas: Routes = [
   component: LancamentosCadastroComponent,
   canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_LANCAMENTO']},
-  },
+  }
 ];
 
 @NgModule({

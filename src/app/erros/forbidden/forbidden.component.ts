@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
+  selector: 'app-forbidden',
+  templateUrl: './forbidden.component.html',
   styleUrls: ['../erros-style.css']
 })
-export class NotFoundComponent implements OnInit {
+export class ForbiddenComponent implements OnInit {
 
   constructor() { }
 

@@ -22,7 +22,7 @@ const rotas: Routes = [
     component: PessoasCadastroComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_PESSOA']},
-  },
+  }
 ];
 
 @NgModule({
