@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService as JwtHelper } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OauthService {
 
+  payload: any;
+
+  oauthUrl: string;
+
   constructor(
     private http: Http,
     private helper: JwtHelper
   ) {
+    this.oauthUrl = `${environment.apiUrl}/oauth/token`;
     this.carregarToken();
   }
-
-  payload: any;
-
-  oauthUrl = 'http://localhost:8080/oauth/token';
 
   login(usuario: string, senha: string): Promise<void> {
 
@@ -49,7 +51,7 @@ export class OauthService {
     localStorage.setItem('token', token);
   }
 
-  private temPermissao(permissao: string): Boolean {
+  public temPermissao(permissao: string): Boolean {
     return this.payload && this.payload.authorities.includes(permissao);
   }
 

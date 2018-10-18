@@ -13,8 +13,10 @@ export class NavbarComponent {
 
   @Input() titulo = 'EasyManager';
 
+  mostrarMenu = false;
+
   constructor(
-    private auth: OauthService,
+    public auth: OauthService,
     private logoutService: LogoutService,
     private router: Router,
     private handler: ErrorHandlerService

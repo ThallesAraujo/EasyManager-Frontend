@@ -107,8 +107,8 @@ export class LancamentosCadastroComponent implements OnInit {
   getPessoas() {
     return this.pessoaService.listarTodas()
     .subscribe( pessoas => {
-      this.pessoas = pessoas.map( ps => {
-        return { label: ps.nome, value: ps.id }
+      this.pessoas = pessoas['content'].map( ps => {
+        return { label: ps.nome, value: ps.id };
       });
     },
     erro => this.errorHandler.handle(erro));

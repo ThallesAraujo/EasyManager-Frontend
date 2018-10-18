@@ -3,6 +3,7 @@ import { Pessoa } from '../models/models';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpParamsOptions } from '@angular/common/http/src/params';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class PessoaFiltro {
   nome: String;
@@ -16,9 +17,11 @@ export class PessoaFiltro {
 
 export class PessoaService {
 
-  pessoasUrl = 'http://localhost:8080/pessoas';
+  pessoasUrl : string;
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient) {
+    this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+   }
 
   pesquisar(filtro: PessoaFiltro): Observable<any> {
 
@@ -39,9 +42,9 @@ export class PessoaService {
 
   }
 
-  listarTodas(): Observable<Pessoa[]> {
+  listarTodas(): Observable<any> {
 
-    return this.client.get<Pessoa[]>(this.pessoasUrl);
+    return this.client.get<any>(this.pessoasUrl);
 
   }
 

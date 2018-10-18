@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { OauthService } from './oauth.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogoutService {
 
-  private url = 'http://localhost:8080/tokens/revoke';
+  private url: string;
 
   constructor(
     private client: HttpClient,
     private auth: OauthService
-  ) { }
+  ) {
+    this.url = `${environment.apiUrl}/tokens/revoke`;
+  }
 
 
   logout() {

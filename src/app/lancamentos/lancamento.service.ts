@@ -4,6 +4,7 @@ import { Lancamento } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpParamsOptions } from '@angular/common/http/src/params';
+import { environment } from 'src/environments/environment';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -18,9 +19,11 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl: string;
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient) {
+    this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
+   }
 
   getLancamentos(filtro: LancamentoFiltro): Observable<any> {
 

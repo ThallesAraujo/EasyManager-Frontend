@@ -24,8 +24,13 @@ import { OauthService } from './seguranca/oauth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './seguranca/auth-interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
 
 registerLocaleData(localePt);
+
+export function tokenGetter(){
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -39,6 +44,9 @@ registerLocaleData(localePt);
     ErrosModule,
     AppRoutingModule,
     ToastModule,
+    JwtModule.forRoot({
+      config:{ tokenGetter: tokenGetter}
+    }),
     ConfirmDialogModule,
     LancamentosModule,
     PessoasModule,
@@ -49,7 +57,6 @@ registerLocaleData(localePt);
     PessoaService,
     MessageService,
     ConfirmationService,
-    JwtHelper,
     OauthService,
     Title,
     ErrorHandlerService,
