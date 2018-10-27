@@ -21,3 +21,11 @@
   border-radius: 30px;
   padding: 2%;
 }
+
+@media screen and (max-width: 600px) {
+
+  .access-container{
+    width: 75%;
+  }
+
+}
